@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.DicMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.entity.DicEntity">
+    <!--@mbg.generated-->
+    <!--@Table dic-->
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="table_name" jdbcType="VARCHAR" property="tableName" />
+    <result column="field_name" jdbcType="VARCHAR" property="fieldName" />
+    <result column="field_value" jdbcType="VARCHAR" property="fieldValue" />
+    <result column="field_detail" jdbcType="VARCHAR" property="fieldDetail" />
+    <result column="describe" jdbcType="VARCHAR" property="describe" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, `table_name`, field_name, field_value, field_detail, `describe`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from dic
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    <!--@mbg.generated-->
+    delete from dic
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.entity.DicEntity">
+    <!--@mbg.generated-->
+    insert into dic (id, `table_name`, field_name, 
+      field_value, field_detail, `describe`
+      )
+    values (#{id,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, 
+      #{fieldValue,jdbcType=VARCHAR}, #{fieldDetail,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.entity.DicEntity">
+    <!--@mbg.generated-->
+    insert into dic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null and id != ''">
+        id,
+      </if>
+      <if test="tableName != null and tableName != ''">
+        `table_name`,
+      </if>
+      <if test="fieldName != null and fieldName != ''">
+        field_name,
+      </if>
+      <if test="fieldValue != null and fieldValue != ''">
+        field_value,
+      </if>
+      <if test="fieldDetail != null and fieldDetail != ''">
+        field_detail,
+      </if>
+      <if test="describe != null and describe != ''">
+        `describe`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null and id != ''">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null and tableName != ''">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null and fieldName != ''">
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldValue != null and fieldValue != ''">
+        #{fieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDetail != null and fieldDetail != ''">
+        #{fieldDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null and describe != ''">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.entity.DicEntity">
+    <!--@mbg.generated-->
+    update dic
+    <set>
+      <if test="tableName != null and tableName != ''">
+        `table_name` = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null and fieldName != ''">
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldValue != null and fieldValue != ''">
+        field_value = #{fieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDetail != null and fieldDetail != ''">
+        field_detail = #{fieldDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null and describe != ''">
+        `describe` = #{describe,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.entity.DicEntity">
+    <!--@mbg.generated-->
+    update dic
+    set `table_name` = #{tableName,jdbcType=VARCHAR},
+      field_name = #{fieldName,jdbcType=VARCHAR},
+      field_value = #{fieldValue,jdbcType=VARCHAR},
+      field_detail = #{fieldDetail,jdbcType=VARCHAR},
+      `describe` = #{describe,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateBatch" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update dic
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`table_name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=VARCHAR} then #{item.tableName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="field_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=VARCHAR} then #{item.fieldName,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="field_value = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=VARCHAR} then #{item.fieldValue,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="field_detail = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=VARCHAR} then #{item.fieldDetail,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+      <trim prefix="`describe` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          when id = #{item.id,jdbcType=VARCHAR} then #{item.describe,jdbcType=VARCHAR}
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=VARCHAR}
+    </foreach>
+  </update>
+  <update id="updateBatchSelective" parameterType="java.util.List">
+    <!--@mbg.generated-->
+    update dic
+    <trim prefix="set" suffixOverrides=",">
+      <trim prefix="`table_name` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.tableName != null">
+            when id = #{item.id,jdbcType=VARCHAR} then #{item.tableName,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="field_name = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.fieldName != null">
+            when id = #{item.id,jdbcType=VARCHAR} then #{item.fieldName,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="field_value = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.fieldValue != null">
+            when id = #{item.id,jdbcType=VARCHAR} then #{item.fieldValue,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="field_detail = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.fieldDetail != null">
+            when id = #{item.id,jdbcType=VARCHAR} then #{item.fieldDetail,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+      <trim prefix="`describe` = case" suffix="end,">
+        <foreach collection="list" index="index" item="item">
+          <if test="item.describe != null">
+            when id = #{item.id,jdbcType=VARCHAR} then #{item.describe,jdbcType=VARCHAR}
+          </if>
+        </foreach>
+      </trim>
+    </trim>
+    where id in
+    <foreach close=")" collection="list" item="item" open="(" separator=", ">
+      #{item.id,jdbcType=VARCHAR}
+    </foreach>
+  </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--@mbg.generated-->
+    insert into dic
+    (id, `table_name`, field_name, field_value, field_detail, `describe`)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=VARCHAR}, #{item.tableName,jdbcType=VARCHAR}, #{item.fieldName,jdbcType=VARCHAR}, 
+        #{item.fieldValue,jdbcType=VARCHAR}, #{item.fieldDetail,jdbcType=VARCHAR}, #{item.describe,jdbcType=VARCHAR}
+        )
+    </foreach>
+  </insert>
+  <insert id="insertOrUpdate" parameterType="com.example.demo.model.entity.DicEntity">
+    <!--@mbg.generated-->
+    insert into dic
+    (id, `table_name`, field_name, field_value, field_detail, `describe`)
+    values
+    (#{id,jdbcType=VARCHAR}, #{tableName,jdbcType=VARCHAR}, #{fieldName,jdbcType=VARCHAR}, 
+      #{fieldValue,jdbcType=VARCHAR}, #{fieldDetail,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}
+      )
+    on duplicate key update 
+    id = #{id,jdbcType=VARCHAR}, 
+    `table_name` = #{tableName,jdbcType=VARCHAR}, 
+    field_name = #{fieldName,jdbcType=VARCHAR}, 
+    field_value = #{fieldValue,jdbcType=VARCHAR}, 
+    field_detail = #{fieldDetail,jdbcType=VARCHAR}, 
+    `describe` = #{describe,jdbcType=VARCHAR}
+  </insert>
+  <insert id="insertOrUpdateSelective" parameterType="com.example.demo.model.entity.DicEntity">
+    <!--@mbg.generated-->
+    insert into dic
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="tableName != null">
+        `table_name`,
+      </if>
+      <if test="fieldName != null">
+        field_name,
+      </if>
+      <if test="fieldValue != null">
+        field_value,
+      </if>
+      <if test="fieldDetail != null">
+        field_detail,
+      </if>
+      <if test="describe != null">
+        `describe`,
+      </if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null">
+        #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldValue != null">
+        #{fieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDetail != null">
+        #{fieldDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+    on duplicate key update 
+    <trim suffixOverrides=",">
+      <if test="id != null">
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="tableName != null">
+        `table_name` = #{tableName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldName != null">
+        field_name = #{fieldName,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldValue != null">
+        field_value = #{fieldValue,jdbcType=VARCHAR},
+      </if>
+      <if test="fieldDetail != null">
+        field_detail = #{fieldDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        `describe` = #{describe,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <!-- 查询所有 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select *
+    from dic
+  </select>
+</mapper>
